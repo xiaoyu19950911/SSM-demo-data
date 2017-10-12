@@ -1,0 +1,90 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<!-- spring的配置文件 -->
+
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 
+ <!-- 
+  <filter>  
+        <filter-name>characterEncodingFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+        <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>UTF-8</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>forceEncoding</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+ </filter>  
+ <filter-mapping>  
+        <filter-name>characterEncodingFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+ </filter-mapping>
+  -->
+	<!-- spring mvc核心：分发servlet -->
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- spring mvc的配置文件 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springMVC.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>OutputExcel</display-name>
+		<servlet-name>OutputExcel</servlet-name>
+		<servlet-class>com.shxy.model.OutputExcel</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>PersonOutput</display-name>
+		<servlet-name>PersonOutput</servlet-name>
+		<servlet-class>com.shxy.model.PersonOutput</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OutputExcel</servlet-name>
+		<url-pattern>/OutputExcel</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PersonOutput</servlet-name>
+		<url-pattern>/PersonOutput</url-pattern>
+	</servlet-mapping>
+</web-app>
+	
+	
+	
